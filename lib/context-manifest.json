@@ -34,5 +34,8 @@
   "specVersion": "jld:specVersion",
   "context": "jld:context",
   "useNativeTypes": "jld:useNativeTypes",
-  "useRdfType": "jld:useRdfType"
+  "useRdfType": "jld:useRdfType",
+
+  "et": "https://manudebuck.github.io/engine-ontology/engine-ontology#",
+  "sourceType": "et:sourceType"
 }

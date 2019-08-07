@@ -3,6 +3,7 @@ import {TestCaseJsonLdSyntaxHandler} from "./rdfsyntax/jsonld/TestCaseJsonLdSynt
 import {TestCaseJsonLdToRdfHandler} from "./rdfsyntax/jsonld/TestCaseJsonLdToRdf";
 import {TestCaseEvalHandler} from "./rdfsyntax/TestCaseEval";
 import {TestCaseSyntaxHandler} from "./rdfsyntax/TestCaseSyntax";
+import {TestCaseLdfQueryEvaluationHandler} from "./sparql/TestCaseLdfQueryEvaluation";
 import {TestCaseNegativeSyntaxHandler} from "./sparql/TestCaseNegativeSyntax";
 import {TestCasePositiveSyntaxHandler} from "./sparql/TestCasePositiveSyntax";
 import {TestCaseQueryEvaluationHandler} from "./sparql/TestCaseQueryEvaluation";
@@ -90,6 +91,10 @@ module.exports = {
     new TestCaseEvalHandler(),
   'http://rdfa.info/vocabs/rdfa-test#NegativeEvaluationTest':
     new TestCaseSyntaxHandler(true), // RDFa test suite never expect errors, just empty documents
+
+  // Ldf test suite
+  'https://manudebuck.github.io/engine-ontology/engine-ontology.ttl#LdfQueryEvaluationTest':
+    new TestCaseLdfQueryEvaluationHandler(),
 };
 // tslint:enable:object-literal-sort-keys
 // tslint:enable:max-line-length
