@@ -78,7 +78,7 @@ describe('TestCaseLdfQueryEvaluation', () => {
   let tpfUrl : string = 'https://manudebuck.github.io/engine-ontology/engine-ontology.ttl#RDF';
 
   describe('#resourceToTestCase', () => {
-    it('should produce a TestCaseLdfQueryEvaluation', async () => {
+    it('should produce a TestCaseLdfQueryEvaluation without data', async () => {
       const resource = new Resource({ term: namedNode('http://example.org/test'), context });
       const action = new Resource({ term: namedNode('blabla'), context });
       action.addProperty(pQuery, new Resource({ term: literal('ACTION.ok'), context }));
@@ -90,8 +90,8 @@ describe('TestCaseLdfQueryEvaluation', () => {
       expect(testcase).toBeInstanceOf(TestCaseLdfQueryEvaluation);
       expect(testcase.type).toEqual('ldf');
       expect(testcase.queryString).toEqual('OK');
-      expect(testcase.queryData).toEqualRdfQuadArray([]);
       expect(testcase.queryResult.type).toEqual('quads');
+      expect(testcase.querySource).toEqual('');
       expect(testcase.queryResult.value).toBeRdfIsomorphic([
         quad('http://ex.org#s1', 'http://ex.org#o1', '"t1"'),
         quad('http://ex.org#s1', 'http://ex.org#o1', '"t2"'),
@@ -146,10 +146,7 @@ describe('TestCaseLdfQueryEvaluation', () => {
       expect(testcase).toBeInstanceOf(TestCaseLdfQueryEvaluation);
       expect(testcase.type).toEqual('ldf');
       expect(testcase.queryString).toEqual('OK');
-      expect(testcase.queryData).toEqualRdfQuadArray([
-        quad('http://ex.org#s1', 'http://ex.org#o1', '"t1"'),
-        quad('http://ex.org#s1', 'http://ex.org#o1', '"t2"'),
-      ]);
+      expect(testcase.querySource).toEqual('RESULT.ttl');
       expect(testcase.queryResult.type).toEqual('quads');
       expect(testcase.queryResult.value).toBeRdfIsomorphic([
         quad('http://ex.org#s1', 'http://ex.org#o1', '"t1"'),

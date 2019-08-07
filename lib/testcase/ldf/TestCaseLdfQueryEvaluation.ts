@@ -43,14 +43,14 @@ export class TestCaseLdfQueryEvaluationHandler implements ITestCaseHandler<TestC
       dataUri = action.property.data.value;
     }
 
-    let queryData: RDF.Quad[] = dataUri ? await arrayifyStream((await Util.fetchRdf(dataUri, options))[1]) : [];
+    // let queryData: RDF.Quad[] = dataUri ? await arrayifyStream((await Util.fetchRdf(dataUri, options))[1]) : [];
     const queryResponse = await Util.fetchCached(resource.property.result.value, options);
     return new TestCaseLdfQueryEvaluation(
       testCaseData,
       {
         baseIRI: Util.normalizeBaseUrl(action.property.query.value),
         queryString: await stringifyStream((await Util.fetchCached(action.property.query.value, options)).body),
-        queryData: queryData,
+        querySource: dataUri || '',
         queryResult: await TestCaseQueryEvaluationHandler.parseQueryResult(
           Util.identifyContentType(queryResponse.url, queryResponse.headers),
           queryResponse.url, queryResponse.body),
@@ -65,7 +65,7 @@ export class TestCaseLdfQueryEvaluationHandler implements ITestCaseHandler<TestC
 export interface ILdfTestaseQueryEvaluationProps {
   baseIRI: string;
   queryString: string;
-  queryData: RDF.Quad[];
+  querySource: string; // url to location of data source
   queryResult: IQueryResult;
   resultSource: IFetchResponse;
   // Necessary for testing different sourceTypes
@@ -83,7 +83,7 @@ export class TestCaseLdfQueryEvaluation implements ILdfTestCase {
 
   public readonly baseIRI: string;
   public readonly queryString: string;
-  public readonly queryData: RDF.Quad[];
+  public readonly querySource: string;
   public readonly queryResult: IQueryResult;
   public readonly resultSource: IFetchResponse;
   public readonly sourceType: string;
@@ -94,7 +94,22 @@ export class TestCaseLdfQueryEvaluation implements ILdfTestCase {
   }
 
   public async test(engine: ILdfQueryEngine, injectArguments: any): Promise<void> {
-    // TODO: Implement test
-    return null;
+    if(this.resultSource){
+      const result : IQueryResult = await engine.query(this.querySource, this.queryString, {});
+      if (! await this.queryResult.equals(result)) {
+        throw new Error(`Invalid query evaluation
+  
+  Query:\n\n${this.queryString}
+
+  Data: ${this.querySource || 'none'}
+  
+  Result Source: ${this.resultSource.url}
+  
+  Expected: ${this.queryResult.toString()}
+  
+  Got: \n ${result.toString()}
+  `);
+      }
+    }
   }
 }
