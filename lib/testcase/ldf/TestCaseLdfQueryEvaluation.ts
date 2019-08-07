@@ -3,9 +3,11 @@ import * as RDF from 'rdf-js';
 import {Resource, RdfListMaterializer } from "rdf-object";
 import {ITestCaseData } from "../ITestCase";
 import {IFetchOptions, Util, IFetchResponse } from "../../Util";
-import {ITestCaseSparql } from "./ITestCaseSparql";
-import {IQueryEngine, IQueryResult } from "./IQueryEngine";
-import {TestCaseQueryEvaluationHandler} from "./TestCaseQueryEvaluation";
+import {ITestCaseSparql } from "../sparql/ITestCaseSparql";
+import {IQueryEngine, IQueryResult } from "../sparql/IQueryEngine";
+import {TestCaseQueryEvaluationHandler} from "../sparql/TestCaseQueryEvaluation";
+import { ILdfTestCase } from "./ILdfTestCase";
+import { ILdfQueryEngine } from "./ILdfQueryEngine";
 // tslint:disable:no-var-requires
 const arrayifyStream = require('arrayify-stream');
 const stringifyStream = require('stream-to-string');
@@ -70,8 +72,8 @@ export interface ILdfTestaseQueryEvaluationProps {
   sourceType: string;
 }
 
-export class TestCaseLdfQueryEvaluation implements ITestCaseSparql {
-  public readonly type = "sparql";
+export class TestCaseLdfQueryEvaluation implements ILdfTestCase {
+  public readonly type = "ldf";
   public readonly approval: string;
   public readonly approvedBy: string;
   public readonly comment: string;
@@ -91,7 +93,8 @@ export class TestCaseLdfQueryEvaluation implements ITestCaseSparql {
     Object.assign(this, props);
   }
 
-  public async test(engine: IQueryEngine, injectArguments: any): Promise<void> {
-      // TODO: Implement test
+  public async test(engine: ILdfQueryEngine, injectArguments: any): Promise<void> {
+    // TODO: Implement test
+    return null;
   }
 }

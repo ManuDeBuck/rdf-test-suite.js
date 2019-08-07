@@ -186,6 +186,14 @@
   resolved "https://registry.yarnpkg.com/@comunica/actor-http-proxy/-/actor-http-proxy-1.9.0.tgz#66bebc509cf66f5d13c6c63d41e2a13584acc811"
   integrity sha512-fLBXL5NVuTGH9kc4BfXFwRAwHUDXB07fV1SBRpewobMMextWTXe5UF9vQvdLrlhg+Dy2EJYBS1jKpfjzs8MWIg==
 
+"@comunica/actor-init-sparql-file@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@comunica/actor-init-sparql-file/-/actor-init-sparql-file-1.9.1.tgz#2c1b1f763ccedd2ac05bb91ea5d61973e1d2063a"
+  integrity sha512-6HKQh8ohIa1hZqdXh1VnryNmKN3vud5DA0Sw/ifdMHi8IhoDVDfqMLmnzAblDGz2tpr+8eFbHBsP/GN//8tchg==
+  dependencies:
+    "@comunica/actor-init-sparql" "^1.9.1"
+    "@comunica/actor-rdf-dereference-file" "^1.9.0"
+
 "@comunica/actor-init-sparql-rdfjs@^1.9.1":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@comunica/actor-init-sparql-rdfjs/-/actor-init-sparql-rdfjs-1.9.1.tgz#bef398edfb1590b9fe2ed579a123e79581ff0079"
@@ -612,6 +620,11 @@
   dependencies:
     asynciterator "^2.0.1"
     rdf-string "^1.3.1"
+
+"@comunica/actor-rdf-dereference-file@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@comunica/actor-rdf-dereference-file/-/actor-rdf-dereference-file-1.9.0.tgz#65238969c4d130e57294252617053ce200c8f7b9"
+  integrity sha512-AZkoodxZZmJF/h/SQYTJDLKphNny7Ig24ldJk8FAEGa2LgiSMuKxtnAOvzIKUxEIx0k7z+RY1M7Dws+tC0ZDew==
 
 "@comunica/actor-rdf-dereference-http-parse@^1.9.0":
   version "1.9.0"

@@ -1,4 +1,4 @@
-import { TestCaseLdfQueryEvaluation, TestCaseLdfQueryEvaluationHandler } from "../../../lib/testcase/sparql/TestCaseLdfQueryEvaluation";
+import { TestCaseLdfQueryEvaluation, TestCaseLdfQueryEvaluationHandler } from "../../../lib/testcase/ldf/TestCaseLdfQueryEvaluation";
 const quad = require("rdf-quad");
 import * as RDF from "rdf-js";
 import { QueryResultQuads } from "../../../lib/testcase/sparql/QueryResultQuads";
@@ -88,7 +88,7 @@ describe('TestCaseLdfQueryEvaluation', () => {
       const testcase = await handler.resourceToTestCase(resource, <any> {});
 
       expect(testcase).toBeInstanceOf(TestCaseLdfQueryEvaluation);
-      expect(testcase.type).toEqual('sparql');
+      expect(testcase.type).toEqual('ldf');
       expect(testcase.queryString).toEqual('OK');
       expect(testcase.queryData).toEqualRdfQuadArray([]);
       expect(testcase.queryResult.type).toEqual('quads');
@@ -144,7 +144,7 @@ describe('TestCaseLdfQueryEvaluation', () => {
       const testcase = await handler.resourceToTestCase(resource, <any> {});
 
       expect(testcase).toBeInstanceOf(TestCaseLdfQueryEvaluation);
-      expect(testcase.type).toEqual('sparql');
+      expect(testcase.type).toEqual('ldf');
       expect(testcase.queryString).toEqual('OK');
       expect(testcase.queryData).toEqualRdfQuadArray([
         quad('http://ex.org#s1', 'http://ex.org#o1', '"t1"'),
